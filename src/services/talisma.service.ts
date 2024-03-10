@@ -1,4 +1,4 @@
-import { captureImage } from "../webcam/webcam.controller";
+import { captureImage } from "../webcam/webcam.control";
 import fs from 'fs';
 
 const newImagesPath = '/tmp'

@@ -1,7 +1,7 @@
 var NodeWebcam = require( "node-webcam" );
 
 // device 
-const device = '/dev/video18'
+const device = '/dev/video0'
 
 // generated image width and height
 const width = 300;
@@ -29,3 +29,5 @@ export function captureImage(imageName) {
     });    
 } 
 
+//listDevices(); // uncomment to list the video input devices
+//captureImage('newImage.jpg'); // uncomment to capture an image

@@ -1,14 +1,22 @@
 import express, { Request, Response } from 'express';
 
-import { captureImage } from '../webcam/webcam.controller';
+import { captureImage } from '../webcam/webcam.control';
+import { moveServo } from '../servo/servo.control';
 
 const app = express();
 
-// Get webcam image
+// Get wecam image
 app.get('/webcam', (req: Request, res: Response) => {
   // Call the captureImage function and send the image as a response
+  // Dont work yet
   const image = captureImage('newImage.jpg');
   res.send(image);
+});
+
+// request to move servo
+app.get('/move', (req: Request, res: Response) => {
+  moveServo();
+  res.send('Servo moved');
 });
 
 // Start the server
