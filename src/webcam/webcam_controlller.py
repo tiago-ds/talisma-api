@@ -20,8 +20,3 @@ def capture_image(image_name):
         print("Imagem capturada com sucesso!")
     else:
         print("Erro ao capturar imagem.")
-
-# Exemplo de uso
-if __name__ == "__main__":
-    image_name = "newImage.jpg"
-    capture_image(image_name)
