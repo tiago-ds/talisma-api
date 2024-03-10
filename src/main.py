@@ -2,12 +2,22 @@ from flask import Flask, Response, request, jsonify
 import os
 from webcam.webcam_controlller import capture_image
 from utils import detect_number
+from flask_cors import CORS
+from servo.servo import launchDice
+from time import sleep
+
 
 app = Flask(__name__)
+CORS(app)
 
 # Rota para obter a imagem da webcam
 @app.route('/webcam', methods=['GET'])
 def get_webcam_image():
+
+    launchDice(50)
+
+    sleep(2)
+
     image_path = 'newImage.jpg'
 
     if os.path.exists(image_path):

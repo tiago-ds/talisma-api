@@ -17,4 +17,3 @@ def launchDice(amt):
 	sleep(2)
 	servo.angle = 0
 	sleep(0.5)
-
