@@ -1,16 +1,28 @@
-from flask import Flask, Response
+from flask import Flask, Response, request, jsonify
 import os
 from webcam.webcam_controlller import capture_image
+from utils import detect_number
 
 app = Flask(__name__)
 
 # Rota para obter a imagem da webcam
 @app.route('/webcam', methods=['GET'])
 def get_webcam_image():
-    image_data = capture_image('newImage.jpg')
+    image_path = 'newImage.jpg'
+
+    if os.path.exists(image_path):
+        os.remove(image_path)
     
-    if image_data is not None:
-        return Response(image_data, mimetype='image/jpeg')
+    capture_image(image_path)
+    
+    if os.path.exists(image_path):
+        api_key = os.getenv("api_key")
+        
+        with open(image_path, 'rb') as image_file:
+            image_content = image_file.read()
+
+        result = detect_number(image_content, api_key)
+        return jsonify({"result": result})
     else:
         return Response("Erro ao capturar a imagem da webcam.", status=500)
 
