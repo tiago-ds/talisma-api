@@ -13,10 +13,12 @@ CORS(app)
 # Rota para obter a imagem da webcam
 @app.route('/webcam', methods=['GET'])
 def get_webcam_image():
+    number = request.args.get('number')
+    if number is None:
+        return Response("O parâmetro 'number' é obrigatório.", status=400)
+    # launchDice(number)
 
-    launchDice(50)
-
-    sleep(2)
+    # sleep(2)
 
     image_path = 'newImage.jpg'
 
