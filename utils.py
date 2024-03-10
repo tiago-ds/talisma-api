@@ -7,12 +7,11 @@ load_dotenv()
 
 
 
-def encode_image(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
+def encode_image(image_content):
+    return base64.b64encode(image_content).decode('utf-8')
 
-def detect_number(image_path, api_key):
-    base64_image = encode_image(image_path)
+def detect_number(image_content, api_key):
+    base64_image =  encode_image(image_content)
     
     openai.api_key = api_key
     client = openai.OpenAI(api_key=api_key)
@@ -41,8 +40,3 @@ def detect_number(image_path, api_key):
         return numero_detectado
     else:
         return "Não foi possível reconhecer o número ou a imagem não representa um dado."
-
-api_key = os.getenv("api_key")
-image_path = 'dados.jpeg'
-result = detect_number(image_path, api_key)
-print(result)
